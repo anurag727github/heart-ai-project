@@ -1,15 +1,4 @@
-# flask
-# flask-cors
-# joblib
-# pandas
-# numpy
-# pillow
-# tensorflow
-# scikit-learn
-# python.exe -m pip install --upgrade pip
-# imblearn
-# pip install -r requirements.txt
-# gunicorn
+
 
 flask==3.1.0
 flask-cors==5.0.0
