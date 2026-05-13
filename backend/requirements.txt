@@ -9,3 +9,4 @@ scikit-learn
 # python.exe -m pip install --upgrade pip
 imblearn
 # pip install -r requirements.tx
+gunicorn
