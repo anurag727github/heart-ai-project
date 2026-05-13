@@ -10,8 +10,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Load models
-clinical_model = joblib.load("../models/clinical_modelV3.pkl")
-image_model = load_model("../models/my_custom_saved_model.keras")
+clinical_model = joblib.load("models/clinical_modelV3.pkl")
+image_model = load_model("models/my_custom_saved_model.keras")
 
 # ---------------- HOME ----------------
 @app.route("/")
