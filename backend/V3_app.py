@@ -9,14 +9,27 @@ from tensorflow.keras.models import load_model
 app = Flask(__name__)
 CORS(app)
 
-# Load models
-clinical_model = joblib.load("models/clinical_modelV3.pkl")
-image_model = load_model("models/my_custom_saved_model.keras")
+print("DEBUG: Local Scikit-Learn Version:", sklearn.__version__)
 
-# ---------------- HOME ----------------
+app = Flask(__name__)
+CORS(app)
+
+try:
+    clinical_model = joblib.load("models/clinical_modelV3.pkl")
+
+    image_model = load_model(
+        "models/my_custom_saved_model.keras"
+    )
+
+    print("SYSTEM READY: Models loaded successfully")
+
+except Exception as e:
+    print("CRITICAL ERROR:", str(e))
+    raise e
+
 @app.route("/")
 def home():
-    return jsonify({"status": "Backend Running"})
+    return {"status": "Backend Running"}
 
 
 # ---------------- CLINICAL ----------------

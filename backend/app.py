@@ -25,8 +25,8 @@ IMAGE_WEIGHT = 0.35
 
 # 3. ROBUST PATH RESOLUTION
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CLINICAL_PATH = os.path.join(BASE_DIR, "..", "models", "clinical_modelV3.pkl")
-IMAGE_PATH = os.path.join(BASE_DIR, "..", "models", "my_custom_saved_model.keras")
+CLINICAL_PATH = os.path.join(BASE_DIR, "models", "clinical_modelV3.pkl")
+IMAGE_PATH = os.path.join(BASE_DIR, "models", "my_custom_saved_model.keras")
 
 try:
     # Attempt loading with strict version awareness
@@ -87,8 +87,7 @@ def predict_image():
             return jsonify({"error": "Payload missing: image file"}), 400
 
         file = request.files["file"]
-        # Optimized for EfficientNetB3 (300x300 resolution)
-        img = Image.open(file.stream).convert("RGB").resize((300, 300))
+        img = Image.open(file.stream).convert("RGB").resize((224, 224))
         img_array = np.array(img) / 255.0 
         img_array = np.expand_dims(img_array, axis=0)
 
@@ -123,7 +122,7 @@ def predict_fusion():
             return jsonify({"error": "Fusion requires an image file"}), 400
         
         file = request.files["file"]
-        img = Image.open(file.stream).convert("RGB").resize((300, 300))
+        img = Image.open(file.stream).convert("RGB").resize((224, 224))
         img_array = np.array(img) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
         image_prob = float(image_model.predict(img_array, verbose=0)[0][0])
